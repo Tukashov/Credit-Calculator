@@ -6,6 +6,7 @@ document.getElementById('loan-form').addEventListener('submit', function (e) {
 });
 
 function calculateResults() {
+    console.log('Calculating...');
     const amount = document.getElementById('amount');
     const interest = document.getElementById('interest');
     const years = document.getElementById('years');
@@ -27,11 +28,11 @@ function calculateResults() {
         document.getElementById('results').style.display = 'block';
         document.getElementById('loading').style.display = 'none';
     } else {
-        showError('Please check your numbers');
+        showError('Пожалуйста, заполните все поля!!!');
     }
 }
 
-function showError() {
+function showError(error) {
     document.getElementById('results').style.display = 'none';
     document.getElementById('loading').style.display = 'none';
     const errorDiv = document.createElement('div');
@@ -43,6 +44,9 @@ function showError() {
     errorDiv.appendChild(document.createTextNode(error));
 
     card.insertBefore(errorDiv, heading);
+    setTimeout(clearError, 5000);
+}
 
-    setTimeout(clearError, 3000);
+function clearError() {
+    document.querySelector('.alert').remove();
 }
